@@ -7,20 +7,17 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('reply', function (Blueprint $table) {
+        Schema::create('topic_sticky', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('post_id');
+            $table->unsignedBigInteger('topic_id');
             $table->foreign('post_id')->references('id')->on('post');
-            $table->integer('score');
-            $table->longText('context');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->timestamps();
+            $table->foreign('topics_id')->references('id')->on('topics');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('reply');
+        Schema::dropIfExists('topic_sticky');
     }
 };

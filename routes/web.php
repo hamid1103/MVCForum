@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Category;
+use App\Models\Topic;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,8 @@ use App\Models\Category;
 
 Route::get('/', function () {
     $Categories = Category::all();
-    return Inertia::render('Welcome');
+    $Topics = Topic::all();
+    return Inertia::render('Welcome', ['topics' => $Topics, 'categories'=>$Categories]);
 });
 
 Route::get('/admin', function () {

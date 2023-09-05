@@ -16,7 +16,9 @@
     @vite('resources/js/app.js')
     @inertiaHead
 </head>
-<body>
+<body style="background-image: url('{{ asset('images/wallpaper.jpg') }}'); background-size: cover;
+    background-repeat:   no-repeat;
+    background-position: center center;  ">
 @inertia
 </body>
 </html>

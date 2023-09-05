@@ -1,6 +1,3 @@
-<script context="module">
-    export {default as layout} from '../../Layout/WideContentLayout.svelte'
-</script>
 <script>
 
 </script>

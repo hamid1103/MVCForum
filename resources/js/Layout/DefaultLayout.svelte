@@ -6,10 +6,10 @@
 </script>
 <div class="parent">
     <div class="LayoutTopbar">
-        <header class="navbar">
+        <header class="navbar bg-gray p-2 s-rounded">
             <section class="navbar-section">
                 <a use:inertia href="/" class="navbar-brand text-bold mr-2">{appname}</a>
-                <a use:inertia href="/" class="btn btn-link">Test</a>
+                <a use:inertia href="/" class="btn btn-link tooltip tooltip-bottom" data-tooltip="Test">Test</a>
                 <a use:inertia href="/" class="btn btn-link">Test2</a>
             </section>
             <section class="navbar-section">
@@ -30,8 +30,7 @@
             </section>
         </header>
     </div>
-    <div class="LayoutRightbar">
-    </div>
+
     <div class="LayoutContent">
         <slot>
 
@@ -55,11 +54,7 @@
         padding: 1em;
     }
 
-    .LayoutRightbar {
-        grid-area: 2 / 5 / 6 / 6;
-    }
-
     .LayoutContent {
-        grid-area: 2 / 1 / 6 / 5;
+        grid-area: 2 / 1 / 6 / 6;
     }
 </style>

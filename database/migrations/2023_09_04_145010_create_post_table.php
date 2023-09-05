@@ -12,9 +12,11 @@ return new class extends Migration {
             $table->string('name');
             $table->unsignedBigInteger('topic_id');
             $table->foreign('topic_id')->references('id')->on('topics');
-            $table->foreignIdFor(\App\Models\User::class);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('score');
             $table->longText('content');
+            $table->boolean('nsfw');
             $table->timestamps();
         });
     }
