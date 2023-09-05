@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,10 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    $Categories = Category::all();
     return Inertia::render('Welcome');
 });
 
-
+Route::get('/admin', function () {
+    return Inertia::render('Admin/AdminHomePanel');
+});

@@ -30,8 +30,7 @@
             </section>
         </header>
     </div>
-    <div class="LayoutRightbar">
-    </div>
+
     <div class="LayoutContent">
         <slot>
 
@@ -55,11 +54,7 @@
         padding: 1em;
     }
 
-    .LayoutRightbar {
-        grid-area: 2 / 5 / 6 / 6;
-    }
-
     .LayoutContent {
-        grid-area: 2 / 1 / 6 / 5;
+        grid-area: 2 / 1 / 6 / 6;
     }
 </style>
