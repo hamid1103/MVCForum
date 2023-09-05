@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $updated_at
  * 
  * @property Post $post
+ * @property User $user
  *
  * @package App\Models
  */
@@ -44,5 +45,10 @@ class Reply extends Model
 	public function post()
 	{
 		return $this->belongsTo(Post::class);
+	}
+
+	public function user()
+	{
+		return $this->belongsTo(User::class);
 	}
 }

@@ -19,11 +19,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $user_id
  * @property int $score
  * @property string $content
+ * @property bool $nsfw
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
  * @property Topic $topic
+ * @property User $user
  * @property Collection|Reply[] $replies
+ * @property Collection|Tag[] $tags
+ * @property Collection|TopicSticky[] $topic_stickies
  *
  * @package App\Models
  */
@@ -34,7 +38,8 @@ class Post extends Model
 	protected $casts = [
 		'topic_id' => 'int',
 		'user_id' => 'int',
-		'score' => 'int'
+		'score' => 'int',
+		'nsfw' => 'bool'
 	];
 
 	protected $fillable = [
@@ -42,7 +47,8 @@ class Post extends Model
 		'topic_id',
 		'user_id',
 		'score',
-		'content'
+		'content',
+		'nsfw'
 	];
 
 	public function topic()
@@ -50,8 +56,24 @@ class Post extends Model
 		return $this->belongsTo(Topic::class);
 	}
 
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
+
 	public function replies()
 	{
 		return $this->hasMany(Reply::class);
+	}
+
+	public function tags()
+	{
+		return $this->belongsToMany(Tag::class, 'tag_post')
+					->withPivot('id');
+	}
+
+	public function topic_stickies()
+	{
+		return $this->hasMany(TopicSticky::class);
 	}
 }

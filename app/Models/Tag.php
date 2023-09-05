@@ -10,26 +10,27 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Category
+ * Class Tag
  * 
  * @property int $id
  * @property string $name
  * 
- * @property Collection|Topic[] $topics
+ * @property Collection|Post[] $posts
  *
  * @package App\Models
  */
-class Category extends Model
+class Tag extends Model
 {
-	protected $table = 'category';
+	protected $table = 'tags';
 	public $timestamps = false;
 
 	protected $fillable = [
 		'name'
 	];
 
-	public function topics()
+	public function posts()
 	{
-		return $this->hasMany(Topic::class);
+		return $this->belongsToMany(Post::class, 'tag_post')
+					->withPivot('id');
 	}
 }

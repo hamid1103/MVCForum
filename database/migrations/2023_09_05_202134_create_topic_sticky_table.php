@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('post_id');
             $table->unsignedBigInteger('topic_id');
             $table->foreign('post_id')->references('id')->on('post');
-            $table->foreign('topics_id')->references('id')->on('topics');
+            $table->foreign('topic_id')->references('id')->on('topics');
         });
     }
 

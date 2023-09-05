@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <div class="div2">
+    <div class="div2 mr-2">
         <div class="card">
             <div class="card-header">
                 <div class="card-title h5">
@@ -74,6 +74,12 @@
         grid-row-gap: 0px;
     }
 
-    .div1 { grid-area: 1 / 1 / 6 / 5; }
-    .div2 { grid-area: 1 / 5 / 6 / 6; }
+    .div1 {
+        grid-area: 1 / 1 / 6 / 5;
+        overflow-y: auto;
+    }
+
+    .div2 {
+        grid-area: 1 / 5 / 6 / 6;
+    }
 </style>

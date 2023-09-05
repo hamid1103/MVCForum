@@ -9,10 +9,10 @@ return new class extends Migration {
     {
         Schema::create('tag_post', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('article_id');
-            $table->unsignedBigInteger('tag_id');
+            $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('post');
-            $table->foreign('tag_id')->references('id')->on('tag');
+            $table->unsignedBigInteger('tag_id');
+            $table->foreign('tag_id')->references('id')->on('tags');
         });
     }
 
