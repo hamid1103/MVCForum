@@ -9,10 +9,11 @@ return new class extends Migration {
     {
         Schema::create('reply', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('post');
             $table->integer('score');
             $table->longText('context');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignIdFor(\App\Models\User::class);
             $table->timestamps();
         });
     }

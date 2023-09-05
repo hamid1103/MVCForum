@@ -7,16 +7,17 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('topic', function (Blueprint $table) {
+        Schema::create('topics', function (Blueprint $table) {
             $table->id();
-            $table->foreign('category_id')->references('id')->on('category');
             $table->string('name');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('category');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('topic');
+        Schema::dropIfExists('topics');
     }
 };
