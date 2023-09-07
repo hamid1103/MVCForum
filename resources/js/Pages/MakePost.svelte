@@ -45,7 +45,7 @@
     <div class="div1 container grid-lg">
         <div class="columns">
             <div class="column col-xs-6">
-                <BlockHeader title="Editing">
+                <BlockHeader title="New Post">
                     <form on:submit|preventDefault={uploadPost}>
                         <div class="form-group">
                             <label class="form-label" for="Title">Title</label>

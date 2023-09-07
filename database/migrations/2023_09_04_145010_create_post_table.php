@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->foreign('topic_id')->references('id')->on('topics');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('score');
+            $table->integer('score')->default(1);
             $table->json('content');
             $table->boolean('nsfw');
             $table->timestamps();

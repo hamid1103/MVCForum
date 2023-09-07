@@ -24,9 +24,14 @@ class TopicsController extends Controller
         $tpd = Topic::findOrFail($tid);
 
         if(Auth::check()){
-            return Inertia::render('MakePost', [
-                'topic_data' => $tpd
-            ]);
+            if(Auth::getUser()->verified)
+            {
+                return Inertia::render('MakePost', [
+                    'topic_data' => $tpd
+                ]);
+            }else{
+                return redirect('/');
+            }
         }else{
             return redirect('/signin');
         }
