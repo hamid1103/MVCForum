@@ -40,7 +40,8 @@ class Post extends Model
 		'topic_id' => 'int',
 		'user_id' => 'int',
 		'score' => 'int',
-		'nsfw' => 'bool'
+		'nsfw' => 'bool',
+        'content' => 'array'
 	];
 
 	protected $fillable = [

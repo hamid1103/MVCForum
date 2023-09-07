@@ -34,6 +34,8 @@ Route::post('/createPost', [\App\Http\Controllers\PostsController::class, 'creat
 
 Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 
+Route::get('/post/{id}', [\App\Http\Controllers\PostsController::class, 'show']);
+
 Route::post('/signin', [\App\Http\Controllers\AuthController::class, 'authenticate']);
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'createUser']);
 

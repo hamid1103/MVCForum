@@ -36,6 +36,7 @@
             return;
         const data = await editor.save()
         $post.postContent = data
+        console.log($post)
         $post.post('/createPost');
     }
 
@@ -48,7 +49,7 @@
                     <form on:submit|preventDefault={uploadPost}>
                         <div class="form-group">
                             <label class="form-label" for="Title">Title</label>
-                            <input class="form-input" required type="text" id="Title" placeholder="Seven Seas" bind:value={post.title}>
+                            <input class="form-input" required type="text" id="Title" placeholder="Seven Seas" bind:value={$post.title}>
                         </div>
                         <div class="form-group s-rounded">
                             <label class="form-label">Content</label>

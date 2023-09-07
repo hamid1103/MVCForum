@@ -1,7 +1,7 @@
 <script>
     import BlockHeader from "@/Components/BlockHeader.svelte";
     import * as feather from "feather-icons/dist/feather"
-    import {inertia, Link} from '@inertiajs/svelte'
+    import {inertia, Link, page} from '@inertiajs/svelte'
 
     export let serverMessage;
     let test = "Hiya";
@@ -18,10 +18,10 @@
 <div class="parent">
     <div class="div1 container grid-lg">
         <div class="columns">
-            <div class="column col-xs-6">
+            <div class="column col-xs-12">
                 {#each categories as cata}
                     <BlockHeader title="{cata.name}">
-                        <table class="table">
+                        <table class="table hover_effect">
                             <tbody>
                             {#each topics as topic}
                                 {#if topic.category_id == cata.id}
@@ -41,26 +41,42 @@
     </div>
     <div class="div2 mr-2">
         <div class="card">
-            <div class="card-header">
-                <div class="card-title h5">
-                    Sidebar
+            {#if $page.props.auth.user == undefined}
+                <div class="card-header">
+                    <div class="card-title h5">
+                        Sidebar
+                    </div>
+                    <div class="card-subtitle text-gray">
+                        As you can see, it's barren.
+                    </div>
                 </div>
-                <div class="card-subtitle text-gray">
-                    As you can see, it's barren.
+                <div class="card-body">
+                    I forgot what i wanted to put here.<br>
+                    Oh there is a footer... nice<br>
+                    Gonna put some buttons there
                 </div>
-            </div>
-            <div class="card-body">
-                I forgot what i wanted to put here.<br>
-                Oh there is a footer... nice<br>
-                Gonna put some buttons there
-            </div>
-            <div class="card-footer">
-                <div class="btn-group btn-group-block">
-                    <button class="btn btn-primary">This</button>
-                    <button class="btn">Be</button>
-                    <button class="btn">Buttons</button>
+                <div class="card-footer">
+                    <div class="btn-group btn-group-block">
+                        <button class="btn btn-primary">This</button>
+                        <button class="btn">Be</button>
+                        <button class="btn">Buttons</button>
+                    </div>
                 </div>
-            </div>
+                {:else }
+                <div class="card-header">
+                    <div class="card-title h5">
+                        {$page.props.auth.user.name}
+                    </div>
+                    <div class="card-subtitle text-gray">
+                        {$page.props.auth.user.status}
+                    </div>
+                </div>
+                <div class="card-body">
+                    {$page.props.auth.user.bio}
+                </div>
+                <div class="card-footer">
+                </div>
+            {/if}
         </div>
 
         {#if serverMessage !== undefined}
@@ -76,6 +92,17 @@
 
 
 <style>
+    .hover_effect tbody tr{
+        background-color: white;
+        color: black;
+        transition: 200ms;
+    }
+    .hover_effect tbody tr:hover{
+        background-color: #3b4351;
+        color: white;
+        transition: 250ms;
+    }
+
     .parent {
         height: 100%;
         width: 100%;

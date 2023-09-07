@@ -20,11 +20,6 @@ class PostsController extends Controller
 
     public function createPost(Request $request): RedirectResponse
     {
-        $postDetails = $request->validate([
-            'title' => ['required'],
-            'content' => ['required']
-        ]);
-
         $newPost = Post::create([
             'name'=>$request->title,
             'topic_id' => $request->topicId,

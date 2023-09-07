@@ -1,6 +1,7 @@
 <script>
     import BlockHeader from "@/Components/BlockHeader.svelte";
-    import {inertia,  Link} from '@inertiajs/svelte'
+    import {inertia, Link} from '@inertiajs/svelte'
+    import PostPreview from "@/Components/PostPreview.svelte";
 
     export let posts;
     export let topic_data;
@@ -23,10 +24,23 @@
         </div>
     {:else }
         {#if topic_data.type === 'default'}
-            <div class="div1 container grid-lg">
-            </div>
-        {:else if topic_data.type === 'media'}
 
+            <div class="div1 container grid-lg">
+                {#each posts.data as post}
+                    <PostPreview post="{post}"></PostPreview>
+                {/each}
+            </div>
+
+        {:else if topic_data.type === 'media'}
+            <div class="div1">
+                <div class="container">
+                    <div class="columns">
+                        <div class="column col-12">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
         {/if}
     {/if}
 
@@ -45,7 +59,9 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group btn-group-block">
-                    <button class="btn btn-primary" use:inertia="{{href: '/topic/'+topic_data.id+'/newPost', method: 'get'}}">New Post</button>
+                    <button class="btn btn-primary"
+                            use:inertia="{{href: '/topic/'+topic_data.id+'/newPost', method: 'get'}}">New Post
+                    </button>
                     <button class="btn">Be</button>
                     <button class="btn">Buttons</button>
                 </div>

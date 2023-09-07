@@ -30,7 +30,7 @@
                                             Unverified
                                             {:else }
                                             Verified
-                                            {/if}
+                                        {/if}
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -45,9 +45,21 @@
 
                 {/if}
 
-                <div class="input-group input-inline">
-                    <input class="form-input" type="text" placeholder="search">
-                    <button class="btn btn-primary input-group-btn">Search</button>
+                <div class="popover popover-bottom">
+                    <button class="btn btn-primary">Search</button>
+                    <div class="popover-container">
+                        <div class="card">
+                            <div class="card-header">
+                                ...
+                            </div>
+                            <div class="card-body">
+                                ...
+                            </div>
+                            <div class="card-footer">
+                                ...
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </header>

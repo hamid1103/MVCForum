@@ -42,7 +42,7 @@ function submit() {
 <div class="container">
 
     <div class="columns">
-        <div class="column col-sm-2">
+        <div class="column col-12">
             <BlockHeader title="sign-in">
                 <div class="columns">
                     <div class="column">
