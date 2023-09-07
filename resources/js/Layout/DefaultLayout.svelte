@@ -1,8 +1,7 @@
 <script>
-    import {inertia} from '@inertiajs/svelte'
+    import {inertia, page} from '@inertiajs/svelte'
 
     export let appname = "Bafu"
-    export let user;
 </script>
 <div class="parent">
     <div class="LayoutTopbar">
@@ -17,9 +16,32 @@
             </section>
             <section class="navbar-section">
 
-                {#if user == undefined}
-                    <a use:inertia href="/login" class="btn btn-primary mr-2">Sign in</a>
+                {#if $page.props.auth.user == undefined}
+                    <a use:inertia href="/signin" class="btn btn-primary mr-2">Sign in</a>
                 {:else }
+                    <div class="popover popover-bottom">
+                        <figure class="avatar avatar-lg mr-2" data-initial="{$page.props.auth.user.name.slice(0, 2)}" style="background-color: #5755d9;"></figure>
+                        <div class="popover-container">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title h5">{$page.props.auth.user.name}</div>
+                                    <div class="card-subtitle text-gray">
+                                        {#if $page.props.auth.user.verified == 0}
+                                            Unverified
+                                            {:else }
+                                            Verified
+                                            {/if}
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    ...
+                                </div>
+                                <div class="card-footer">
+                                    <a use:inertia href="/logout" class="btn btn-primary">Log out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 {/if}
 

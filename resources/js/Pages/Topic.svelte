@@ -1,32 +1,51 @@
 <script>
+    import BlockHeader from "@/Components/BlockHeader.svelte";
+    import {inertia,  Link} from '@inertiajs/svelte'
+
     export let posts;
     export let topic_data;
+    console.log(topic_data)
+    console.log(posts);
 </script>
 
+<svelte:head>
+    <title>{topic_data.name}</title>
+</svelte:head>
+
 <div class="parent">
-    <div class="div1 container grid-lg">
-        {#if posts == undefined}
-            Ain't nothing in here
+    {#if posts.data.length == 0}
+        <div class="div1 container grid-lg">
+            <div class="columns">
+                <div class="column col-xs-6">
+                    <BlockHeader title="Ain't nothing in here"></BlockHeader>
+                </div>
+            </div>
+        </div>
+    {:else }
+        {#if topic_data.type === 'default'}
+            <div class="div1 container grid-lg">
+            </div>
+        {:else if topic_data.type === 'media'}
+
         {/if}
-    </div>
+    {/if}
+
     <div class="div2">
-        <div class="card">
+        <div class="card mr-2">
             <div class="card-header">
                 <div class="card-title h5">
-                    Sidebar
+                    {topic_data.name}
                 </div>
                 <div class="card-subtitle text-gray">
-                    As you can see, it's barren.
+                    A topic
                 </div>
             </div>
             <div class="card-body">
-                I forgot what i wanted to put here.<br>
-                Oh there is a footer... nice<br>
-                Gonna put some buttons there
+                {topic_data.description}
             </div>
             <div class="card-footer">
                 <div class="btn-group btn-group-block">
-                    <button class="btn btn-primary">This</button>
+                    <button class="btn btn-primary" use:inertia="{{href: '/topic/'+topic_data.id+'/newPost', method: 'get'}}">New Post</button>
                     <button class="btn">Be</button>
                     <button class="btn">Buttons</button>
                 </div>
@@ -46,6 +65,11 @@
         grid-row-gap: 0px;
     }
 
-    .div1 { grid-area: 1 / 1 / 6 / 5; }
-    .div2 { grid-area: 1 / 5 / 6 / 6; }
+    .div1 {
+        grid-area: 1 / 1 / 6 / 5;
+    }
+
+    .div2 {
+        grid-area: 1 / 5 / 6 / 6;
+    }
 </style>

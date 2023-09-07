@@ -1,7 +1,9 @@
 <script>
     import BlockHeader from "@/Components/BlockHeader.svelte";
     import * as feather from "feather-icons/dist/feather"
+    import {inertia, Link} from '@inertiajs/svelte'
 
+    export let serverMessage;
     let test = "Hiya";
     export let topics;
     export let categories;
@@ -23,9 +25,10 @@
                             <tbody>
                             {#each topics as topic}
                                 {#if topic.category_id == cata.id}
-                                    <tr>
+                                    <tr class="c-hand" use:inertia="{{href: '/topic/' + topic.id, method: 'get'}}">
                                         <td>{@html feather.icons['message-square'].toSvg()} {topic.name}</td>
                                     </tr>
+
                                 {/if}
                             {/each}
 
@@ -59,6 +62,15 @@
                 </div>
             </div>
         </div>
+
+        {#if serverMessage !== undefined}
+
+            <div class="toast toast-warning">
+                <button class="btn btn-clear float-right"></button>
+                {serverMessage}
+            </div>
+        {/if}
+
     </div>
 </div>
 
@@ -77,6 +89,19 @@
     .div1 {
         grid-area: 1 / 1 / 6 / 5;
         overflow-y: auto;
+    }
+
+    .div1::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .div1::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(25, 0, 0, 0.3);
+    }
+
+    .div1::-webkit-scrollbar-thumb {
+        background-color: darkgray;
+        border-radius: 10px;
     }
 
     .div2 {

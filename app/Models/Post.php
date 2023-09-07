@@ -7,12 +7,13 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Post
- * 
+ *
  * @property int $id
  * @property string $name
  * @property int $topic_id
@@ -22,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool $nsfw
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Topic $topic
  * @property User $user
  * @property Collection|Reply[] $replies

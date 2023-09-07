@@ -25,3 +25,17 @@ Route::get('/', function () {
 Route::get('/admin', function () {
     return Inertia::render('Admin/AdminHomePanel');
 });
+
+Route::get('/signin', function () {
+    return Inertia::render('SignIn');
+});
+
+Route::post('/createPost', [\App\Http\Controllers\PostsController::class, 'createPost']);
+
+Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
+
+Route::post('/signin', [\App\Http\Controllers\AuthController::class, 'authenticate']);
+Route::post('/register', [\App\Http\Controllers\AuthController::class, 'createUser']);
+
+Route::get('/topic/{tid}', [\App\Http\Controllers\TopicsController::class, 'show']);
+Route::get('/topic/{tid}/newPost', [\App\Http\Controllers\TopicsController::class, 'newPost']);
