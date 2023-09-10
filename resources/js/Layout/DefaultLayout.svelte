@@ -65,7 +65,7 @@
         </header>
     </div>
 
-    <div class="LayoutContent">
+    <div class="LayoutContent" >
         <slot>
 
         </slot>

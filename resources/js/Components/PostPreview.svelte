@@ -23,12 +23,13 @@
     <div class="card-body">
         <div class="tile">
             <div class="tile-content" style="width: 100%;">
-                <div class="tile-title" style="width: 100%;">{post.name}</div>
+                <div class="tile-title text-bold" style="width: 100%;">{post.name}</div>
                 <div class="tile-subtitle" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 100%;">{prevtext}</div>
             </div>
         </div>
     </div>
 </div>
+
 <style>
     .hover_effect{
         background-color: white;
