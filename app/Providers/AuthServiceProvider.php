@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+use Silber\Bouncer\Bouncer;
 
 // use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -21,6 +22,14 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        //Allow Admin stuff
+        Bouncer::allow('admin')->everything();
+
+        //Allow Moderator stuff
+        Bouncer::allow('mod')->to('createTopic');
+        Bouncer::allow('mod')->to('createPost');
+
+        //Allow user stuff
+        Bouncer::allow('reply')->to('createPost');
     }
 }

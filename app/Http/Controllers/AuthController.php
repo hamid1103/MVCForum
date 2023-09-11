@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 
+use Inertia\Inertia;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -31,7 +33,6 @@ class AuthController extends Controller
 
     public function createUser(Request $request) : RedirectResponse
     {
-
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -41,17 +42,20 @@ class AuthController extends Controller
 
 
         //create user
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'password' => Hash::make($request->password),
             'email' => $request->email
         ]);
 
+        event(new Registered($user));
+
         //log them in
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect('/');
+            return redirect('/email/verify');
+            //return Inertia::render('EmailVerification/CheckEmailVerification');
         }
 
         //return errors

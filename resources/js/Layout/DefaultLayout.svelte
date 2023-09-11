@@ -8,8 +8,7 @@
         <header class="navbar bg-gray p-2 s-rounded">
             <section class="navbar-section">
                 <a use:inertia href="/" class="navbar-brand text-bold mr-2">{appname}</a>
-                <a use:inertia href="/" class="btn btn-link tooltip tooltip-bottom" data-tooltip="Test">Test</a>
-                <a use:inertia href="/" class="btn btn-link">Test2</a>
+                <a use:inertia href="/about" class="btn btn-link tooltip tooltip-bottom" data-tooltip="About us">About</a>
             </section>
             <section class="navbar-section">
 
