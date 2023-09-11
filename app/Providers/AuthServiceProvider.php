@@ -22,7 +22,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //Allow Admin stuff
+        /*//Allow Admin stuff
         Bouncer::allow('admin')->everything();
 
         //Allow Moderator stuff
@@ -30,6 +30,6 @@ class AuthServiceProvider extends ServiceProvider
         Bouncer::allow('mod')->to('createPost');
 
         //Allow user stuff
-        Bouncer::allow('reply')->to('createPost');
+        Bouncer::allow('reply')->to('createPost');*/
     }
 }

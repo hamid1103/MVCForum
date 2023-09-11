@@ -5,7 +5,6 @@ use Inertia\Inertia;
 use App\Models\Category;
 use App\Models\Topic;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Bouncer;
 
 /*
 |--------------------------------------------------------------------------
