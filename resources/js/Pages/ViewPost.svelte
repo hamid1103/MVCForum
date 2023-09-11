@@ -10,9 +10,9 @@
             <BlockHeader title="{post.name}">
                 {#each post.content.blocks as block}
                     {#if block.type == 'header'}
-                        <p class="h{block.data.level}">{block.data.text}</p>
+                        <p class="h{block.data.level}">{@html block.data.text}</p>
                     {:else if block.type == 'paragraph'}
-                        <p>{block.data.text}</p>
+                        <p>{@html block.data.text}</p>
                     {/if}
                 {/each}
             </BlockHeader>

@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Notifications\Notifiable;use Silber\Bouncer\Database\HasRolesAndAbilities;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class User
@@ -35,7 +35,6 @@ class User extends Authenticatable implements MustVerifyEmail
 {
 
     use Notifiable;
-    use HasRolesAndAbilities;
 
 	protected $table = 'users';
 
