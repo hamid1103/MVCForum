@@ -4,6 +4,9 @@
     export let post;
     console.log(post)
 </script>
+<svelte:head>
+    <title>{post.name}</title>
+</svelte:head>
 <div class="div1 container grid-lg" style="overflow-y: auto;">
     <div class="columns">
         <div class="column col-sm-6">

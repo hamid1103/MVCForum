@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserSettings;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +47,10 @@ class AuthController extends Controller
             'name' => $request->name,
             'password' => Hash::make($request->password),
             'email' => $request->email
+        ]);
+
+        UserSettings::create([
+            'user_id' => $user->id
         ]);
 
         event(new Registered($user));
