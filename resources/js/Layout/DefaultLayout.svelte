@@ -1,8 +1,16 @@
 <script>
     import {inertia, page} from '@inertiajs/svelte'
 
+    let ShowToast = false
+    $: if($page.props.flash.alert)
+        ShowToast = true
+
+    let curToast;
     export let appname = "Bafu"
 </script>
+{#if ShowToast}
+    <div class="toast toast-{$page.props.flash.alert.type}" bind:this={curToast}><button class="btn btn-clear float-right" on:click={()=>{ShowToast = false}}></button>{$page.props.flash.alert.message}</div>
+{/if}
 <div class="parent">
     <div class="LayoutTopbar">
         <header class="navbar bg-gray p-2 s-rounded">
@@ -43,7 +51,6 @@
                             </div>
                         </div>
                     </div>
-
                 {/if}
 
                 <div class="popover popover-bottom">

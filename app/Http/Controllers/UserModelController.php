@@ -28,12 +28,35 @@ class UserModelController extends Controller
         User::findOrFail($user->id)->update([
             'bio'=>$bio
         ]);
+        $request->session()->flash('alert', [
+            'type'=>'success',
+            'message'=>'Updated Bio'
+        ]);
     }
 
     public function updateStatus(Request $request)
     {
         $user = $request->user();
         $status = $request->status;
+        User::findOrFail($user->id)->update([
+            'status'=>$status
+        ]);
+        $request->session()->flash('alert', [
+            'type'=>'success',
+            'message'=>'Updated Status'
+        ]);
+    }
+
+    public function updateSettings(Request $request)
+    {
+        $settings = UserSettings::where('user_id','=',$request->user()->id)->firstOrFail();
+        $settings->update([
+            'hideNSFW'=> $request->hideNSFW
+        ]);
+        $request->session()->flash('alert', [
+            'type'=>'success',
+            'message'=>'Updated Settings'
+        ]);
     }
 
 }

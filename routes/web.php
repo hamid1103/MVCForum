@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Post;
+use App\Models\UserSettings;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Category;
@@ -21,13 +24,23 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', function () {
     $Categories = Category::all();
-    $Topics = Topic::all();
-    return Inertia::render('Welcome', ['topics' => $Topics, 'categories'=>$Categories]);
+
+    $user = Auth::user();
+    $settings = UserSettings::where('user_id', $user->id)->get();
+    $hideNSFW = $settings[0]->hideNSFW;
+
+    if ($hideNSFW === 1) {
+        $Topics = Topic::where('nsfw', '=', '0')->get();
+    } else {
+        $Topics = Topic::all();
+    }
+    return Inertia::render('Welcome', ['topics' => $Topics, 'categories' => $Categories]);
 });
 
 Route::get('/settings', [\App\Http\Controllers\UserModelController::class, 'edit']);
 Route::post('/updateBio', [\App\Http\Controllers\UserModelController::class, 'updateBio']);
 Route::post('/updateStatus', [\App\Http\Controllers\UserModelController::class, 'updateStatus']);
+Route::post('/updateSettings', [\App\Http\Controllers\UserModelController::class, 'updateSettings']);
 
 Route::get('/admin', function () {
     return Inertia::render('Admin/AdminHomePanel');
@@ -70,6 +83,6 @@ Route::get('/topic/{tid}/newPost', [\App\Http\Controllers\TopicsController::clas
 
 
 //misc links
-Route::get('/about', function (){
+Route::get('/about', function () {
     return Inertia::render('About');
 });
