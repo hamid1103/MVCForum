@@ -30,8 +30,6 @@
     let checkboxForm = useForm({
         hideNSFW: Boolean(settings.hideNSFW)
     })
-
-
 </script>
 
 <BlockHeader title="User Settings">

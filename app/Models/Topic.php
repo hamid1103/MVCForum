@@ -59,5 +59,4 @@ class Topic extends Model
 	{
 		return $this->hasMany(TopicSticky::class);
 	}
-
 }

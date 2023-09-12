@@ -50,7 +50,8 @@ class User extends Authenticatable implements MustVerifyEmail
 		'password',
 		'bio',
 		'status',
-		'remember_token'
+		'remember_token',
+        'role'
 	];
 
 	public function posts()
