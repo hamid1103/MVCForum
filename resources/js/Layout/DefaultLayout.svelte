@@ -33,7 +33,7 @@
                                 <div class="card-header">
                                     <div class="card-title h5">{$page.props.auth.user.name}</div>
                                     <div class="card-subtitle text-gray">
-                                        {#if $page.props.auth.user.verified == 0}
+                                        {#if $page.props.verified == 0}
                                             Unverified
                                             {:else }
                                             Verified

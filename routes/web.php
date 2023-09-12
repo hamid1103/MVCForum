@@ -26,14 +26,19 @@ Route::get('/', function () {
     $Categories = Category::all();
 
     $user = Auth::user();
-    $settings = UserSettings::where('user_id', $user->id)->get();
-    $hideNSFW = $settings[0]->hideNSFW;
+    if($user!==null){
+        $settings = UserSettings::where('user_id', $user->id)->get();
+        $hideNSFW = $settings[0]->hideNSFW;
 
-    if ($hideNSFW === 1) {
+        if ($hideNSFW === 1) {
+            $Topics = Topic::where('nsfw', '=', '0')->get();
+        } else {
+            $Topics = Topic::all();
+        }
+    }else{
         $Topics = Topic::where('nsfw', '=', '0')->get();
-    } else {
-        $Topics = Topic::all();
     }
+
     return Inertia::render('Welcome', ['topics' => $Topics, 'categories' => $Categories]);
 });
 
