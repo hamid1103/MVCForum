@@ -33,7 +33,9 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    ...
+                                    <a use:inertia href="/settings" class="btn-link">
+                                        Settings
+                                    </a>
                                 </div>
                                 <div class="card-footer">
                                     <a use:inertia href="/logout" class="btn btn-primary">Log out</a>

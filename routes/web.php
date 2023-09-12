@@ -15,6 +15,8 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
+| ToDo: Group routes
+|
 */
 
 Route::get('/', function () {
@@ -22,6 +24,10 @@ Route::get('/', function () {
     $Topics = Topic::all();
     return Inertia::render('Welcome', ['topics' => $Topics, 'categories'=>$Categories]);
 });
+
+Route::get('/settings', [\App\Http\Controllers\UserModelController::class, 'edit']);
+Route::post('/updateBio', [\App\Http\Controllers\UserModelController::class, 'updateBio']);
+Route::post('/updateStatus', [\App\Http\Controllers\UserModelController::class, 'updateStatus']);
 
 Route::get('/admin', function () {
     return Inertia::render('Admin/AdminHomePanel');

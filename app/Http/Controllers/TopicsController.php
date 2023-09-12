@@ -21,10 +21,11 @@ class TopicsController extends Controller
 
     public function newPost(string $tid)
     {
+        $user = Auth::user();
         $tpd = Topic::findOrFail($tid);
 
         if(Auth::check()){
-            if(Auth::getUser()->hasVerifiedEmail())
+            if($user->hasVerifiedEmail())
             {
                 return Inertia::render('MakePost', [
                     'topic_data' => $tpd

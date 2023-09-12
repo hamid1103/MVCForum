@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\UserSettings;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class UserModelController extends Controller
 {
@@ -11,14 +15,25 @@ class UserModelController extends Controller
 
     }
 
+    public function edit(){
+        $user = Auth::user();
+        $userSettings = UserSettings::where('user_id', Auth::id())->get();
+        return Inertia::render('UserSettings',['user'=>$user,'settings'=>$userSettings]);
+    }
+
     public function updateBio(Request $request)
     {
-
+        $user = $request->user();
+        $bio = $request->bio;
+        User::findOrFail($user->id)->update([
+            'bio'=>$bio
+        ]);
     }
 
     public function updateStatus(Request $request)
     {
-
+        $user = $request->user();
+        $status = $request->status;
     }
 
 }
