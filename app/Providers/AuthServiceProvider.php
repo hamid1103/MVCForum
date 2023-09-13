@@ -36,6 +36,9 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role==='admin';
         });
 
+        Gate::define('update-site', function (User $user){
+            return $user->role==='admin' or $user->role==='mod';
+        });
 
     }
 }
