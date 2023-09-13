@@ -15,19 +15,26 @@ class TopicsController extends Controller
 {
     public function show(string $tid)
     {
-
         $user = Auth::user();
-        $settings = UserSettings::where('user_id', $user->id)->get();
-        $hideNSFW = $settings[0]->hideNSFW;
+        if($user !== null){
+            $settings = UserSettings::where('user_id', $user->id)->get();
+            $hideNSFW = $settings[0]->hideNSFW;
 
-        if ($hideNSFW === 1){
+            if ($hideNSFW === 1){
+                $posts = Post::where([
+                    ['topic_id','=', $tid],
+                    ['nsfw','=', '0'],
+                ])->paginate(15);
+            }else{
+                $posts = Post::where('topic_id', $tid)->paginate(15);
+            }
+        }else{
             $posts = Post::where([
                 ['topic_id','=', $tid],
                 ['nsfw','=', '0'],
             ])->paginate(15);
-        }else{
-            $posts = Post::where('topic_id', $tid)->paginate(15);
         }
+
 
         $tpd = Topic::findOrFail($tid);
 

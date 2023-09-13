@@ -4,7 +4,7 @@ import BlockHeader from "@/Components/BlockHeader.svelte";
 import { useForm } from '@inertiajs/svelte'
 
 let form = useForm({
-    email: null,
+    login: null,
     password: null,
     remember: false,
 })
@@ -49,10 +49,10 @@ function submit() {
 
                         <form on:submit|preventDefault={submit}>
                             <div class="form-group">
-                                <label class="form-label" for="input-example-1">Email</label>
-                                <input class="form-input" id="input-example-1" required type="text" bind:value={$form.email} placeholder="Email">
-                                {#if $form.errors.email}
-                                    <div class="form-error bg-error">{$form.errors.email}</div>
+                                <label class="form-label" for="input-example-1">Email or Username</label>
+                                <input class="form-input" id="input-example-1" required type="text" bind:value={$form.login} placeholder="Email">
+                                {#if $form.errors.login}
+                                    <div class="form-error bg-error">{$form.errors.login}</div>
                                 {/if}
                             </div>
                             <div class="form-group">

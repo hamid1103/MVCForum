@@ -17,14 +17,17 @@ class AuthController extends Controller
     public function authenticate(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'login' => ['required'],
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        $login = $request->login;
+        $user = User::where('email',$login)->orWhere('name', $login)->first();
+        if (Auth::attempt(['email' => $user->email, 'password' => $request->password]) ||
+            Auth::attempt(['username' => $user->name, 'password' => $request->password])) {
+            Auth::loginUsingId($user->id);
             $request->session()->regenerate();
-
-            return redirect()->intended('/');
+            return redirect('/');
         }
 
         return back()->withErrors([
@@ -36,7 +39,7 @@ class AuthController extends Controller
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required'],
+            'password' => ['required|min:8'],
             'name' => ['required']
         ]);
 
