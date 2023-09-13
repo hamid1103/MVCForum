@@ -2,14 +2,14 @@
     import {inertia, page} from '@inertiajs/svelte'
 
     let ShowToast = false
-    $: if ($page.props.flash.alert)
+    $: if ($page.props.flash.alert){
         ShowToast = true
+    }else{ ShowToast=false}
 
-    let curToast;
     export let appname = "Bafu"
 </script>
 {#if ShowToast}
-    <div class="toast toast-{$page.props.flash.alert.type}" bind:this={curToast}>
+    <div class="toast toast-{$page.props.flash.alert.type}">
         <button class="btn btn-clear float-right"
                 on:click={()=>{ShowToast = false}}></button>{$page.props.flash.alert.message}</div>
 {/if}

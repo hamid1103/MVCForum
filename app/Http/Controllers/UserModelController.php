@@ -32,6 +32,7 @@ class UserModelController extends Controller
             'type'=>'success',
             'message'=>'Updated Bio'
         ]);
+        return redirect('/settings');
     }
 
     public function updateStatus(Request $request)
@@ -45,6 +46,8 @@ class UserModelController extends Controller
             'type'=>'success',
             'message'=>'Updated Status'
         ]);
+        return redirect('/settings');
+
     }
 
     public function updateSettings(Request $request)
@@ -57,6 +60,7 @@ class UserModelController extends Controller
             'type'=>'success',
             'message'=>'Updated Settings'
         ]);
+        return redirect('/settings');
     }
 
 }
