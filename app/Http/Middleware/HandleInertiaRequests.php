@@ -37,6 +37,10 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $isVerified = false;
+        if(Auth::user() !== null and Auth::user()->hasVerifiedEmail()){
+            $isVerified = true;
+        }
         return array_merge(parent::share($request), [
             'flash' => [
                 'alert' => $request->session()->get('alert'),
@@ -44,7 +48,7 @@ class HandleInertiaRequests extends Middleware
             'auth.user' => fn () => $request->user()
                 ? $request->user()->only('id', 'name', 'email', 'verified', 'bio', 'status')
                 : null,
-            'verified'=>Auth::user()->hasVerifiedEmail(),
+            'verified'=> $isVerified,
         ]);
     }
 }
