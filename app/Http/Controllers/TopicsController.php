@@ -34,26 +34,5 @@ class TopicsController extends Controller
         ]);
     }
 
-    public function newPost(string $tid)
-    {
-        $tpd = Topic::findOrFail($tid);
 
-        if(Auth::check()){
-            if(Auth::user()->hasVerifiedEmail())
-            {
-                return Inertia::render('MakePost', [
-                    'topic_data' => $tpd
-                ]);
-            }else{
-                \Request::session()->flash('alert', [
-                    'type'=>'error',
-                    'message'=>'You must be verified to post'
-                ]);
-                return redirect('/');
-            }
-        }else{
-            return redirect('/signin');
-        }
-
-    }
 }

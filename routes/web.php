@@ -82,7 +82,7 @@ Route::post('/signin', [\App\Http\Controllers\AuthController::class, 'authentica
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'createUser']);
 
 Route::get('/topic/{tid}', [\App\Http\Controllers\TopicsController::class, 'show']);
-Route::get('/topic/{tid}/newPost', [\App\Http\Controllers\TopicsController::class, 'newPost']);
+Route::get('/topic/{tid}/newPost', [\App\Http\Controllers\PostsController::class, 'newPost']);
 
 
 //misc links

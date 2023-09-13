@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Topic;
 use Inertia\Inertia;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,27 @@ class PostsController extends Controller
         return Inertia::render('ViewPost', [
             'post' => $post
         ]);
+    }
+
+    public function newPost(string $tid)
+    {
+        $tpd = Topic::findOrFail($tid);
+        if(Auth::check()){
+            if(Auth::user()->hasVerifiedEmail())
+            {
+                return Inertia::render('MakePost', [
+                    'topic_data' => $tpd
+                ]);
+            }else{
+                \Request::session()->flash('alert', [
+                    'type'=>'error',
+                    'message'=>'You must be verified to post'
+                ]);
+                return redirect('/');
+            }
+        }else{
+            return redirect('/signin');
+        }
     }
 
     public function createPost(Request $request): RedirectResponse
