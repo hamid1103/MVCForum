@@ -46,7 +46,7 @@ class HandleInertiaRequests extends Middleware
                 'alert' => $request->session()->get('alert'),
             ],
             'auth.user' => fn () => $request->user()
-                ? $request->user()->only('id', 'name', 'email', 'verified', 'bio', 'status')
+                ? $request->user()->only('id', 'name', 'email', 'verified', 'bio', 'status', 'role')
                 : null,
             'verified'=> $isVerified,
         ]);

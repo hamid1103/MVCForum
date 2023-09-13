@@ -47,9 +47,7 @@ Route::post('/updateBio', [\App\Http\Controllers\UserModelController::class, 'up
 Route::post('/updateStatus', [\App\Http\Controllers\UserModelController::class, 'updateStatus']);
 Route::post('/updateSettings', [\App\Http\Controllers\UserModelController::class, 'updateSettings']);
 
-Route::get('/admin', function () {
-    return Inertia::render('Admin/AdminHomePanel');
-});
+Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index']);
 
 Route::get('/signin', function () {
     return Inertia::render('SignIn');

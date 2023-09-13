@@ -2,21 +2,27 @@
     import {inertia, page} from '@inertiajs/svelte'
 
     let ShowToast = false
-    $: if($page.props.flash.alert)
+    $: if ($page.props.flash.alert)
         ShowToast = true
 
     let curToast;
     export let appname = "Bafu"
 </script>
 {#if ShowToast}
-    <div class="toast toast-{$page.props.flash.alert.type}" bind:this={curToast}><button class="btn btn-clear float-right" on:click={()=>{ShowToast = false}}></button>{$page.props.flash.alert.message}</div>
+    <div class="toast toast-{$page.props.flash.alert.type}" bind:this={curToast}>
+        <button class="btn btn-clear float-right"
+                on:click={()=>{ShowToast = false}}></button>{$page.props.flash.alert.message}</div>
 {/if}
 <div class="parent">
     <div class="LayoutTopbar">
         <header class="navbar bg-gray p-2 s-rounded">
             <section class="navbar-section">
                 <a use:inertia href="/" class="navbar-brand text-bold mr-2">{appname}</a>
-                <a use:inertia href="/about" class="btn btn-link tooltip tooltip-bottom" data-tooltip="About us">About</a>
+                <a use:inertia href="/about" class="btn btn-link tooltip tooltip-bottom"
+                   data-tooltip="About us">About</a>
+                {#if $page.props.auth.user && $page.props.auth.user.role === 'admin'}
+                    <a use:inertia href="/admin" class="btn btn-link">Admin</a>
+                {/if}
             </section>
             <section class="navbar-section">
 
@@ -27,7 +33,8 @@
                     <a use:inertia href="/signin" class="btn btn-primary mr-2">Sign in</a>
                 {:else }
                     <div class="popover popover-bottom">
-                        <figure class="avatar avatar-lg mr-2" data-initial="{$page.props.auth.user.name.slice(0, 2)}" style="background-color: #5755d9;"></figure>
+                        <figure class="avatar avatar-lg mr-2" data-initial="{$page.props.auth.user.name.slice(0, 2)}"
+                                style="background-color: #5755d9;"></figure>
                         <div class="popover-container">
                             <div class="card">
                                 <div class="card-header">
@@ -35,7 +42,7 @@
                                     <div class="card-subtitle text-gray">
                                         {#if $page.props.verified == 0}
                                             Unverified
-                                            {:else }
+                                        {:else }
                                             Verified
                                         {/if}
                                     </div>
@@ -73,7 +80,7 @@
         </header>
     </div>
 
-    <div class="LayoutContent" >
+    <div class="LayoutContent">
         <slot>
 
         </slot>
