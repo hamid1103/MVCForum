@@ -16,15 +16,20 @@
                         <p class="h{block.data.level}">{@html block.data.text}</p>
                     {:else if block.type == 'paragraph'}
                         <p>{@html block.data.text}</p>
+                    {:else if block.type == 'image'}
+                        <img src="{block.data.url}" alt="{block.data.caption}" class="img img-responsive">
                     {/if}
                 {/each}
             </BlockHeader>
+            <!--Replies here-->
+            
+
         </div>
     </div>
 </div>
 
 <style>
-    .div1{
+    .div1 {
         height: 100%
     }
 

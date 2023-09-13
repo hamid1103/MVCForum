@@ -6,7 +6,7 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@editorjs/quote": "^2.5.0",
+        "@editorjs/simple-image": "^1.5.1",
         "@sveltejs/vite-plugin-svelte": "^2.4.5",
         "axios": "^1.1.2",
         "laravel-vite-plugin": "^0.8.0",

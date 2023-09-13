@@ -43,8 +43,6 @@ class AuthController extends Controller
             'name' => ['required']
         ]);
 
-
-
         //create user
         $user = User::create([
             'name' => $request->name,

@@ -11,6 +11,7 @@
             <button class="btn">Server Settings</button>
             <button class="btn">Site Settings</button>
             <button class="btn">Roles</button>
+            <button class="btn">Tags</button>
             <button class="btn">Categories</button>
             <button class="btn">Topics</button>
         </div>

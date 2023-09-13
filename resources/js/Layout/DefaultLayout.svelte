@@ -33,7 +33,7 @@
                     <a use:inertia href="/signin" class="btn btn-primary mr-2">Sign in</a>
                 {:else }
                     <div class="popover popover-bottom">
-                        <figure class="avatar avatar-lg mr-2" data-initial="{$page.props.auth.user.name.slice(0, 2)}"
+                        <figure use:inertia href="/user" class="avatar avatar-lg mr-2" data-initial="{$page.props.auth.user.name.slice(0, 2)}"
                                 style="background-color: #5755d9;"></figure>
                         <div class="popover-container">
                             <div class="card">
