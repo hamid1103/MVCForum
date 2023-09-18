@@ -2,6 +2,8 @@
     import BlockHeader from "@/Components/BlockHeader.svelte";
     import PostView from "@/Components/PostView.svelte";
     import {page} from "@inertiajs/svelte";
+    import MakePost from "@/Pages/MakePost.svelte";
+    import MakeReply from "@/Components/MakeReply.svelte";
 
     export let post;
     console.log(post)
@@ -43,6 +45,7 @@
                 </div>
             </PostView>
             <!--Replies here-->
+            <MakeReply></MakeReply>
 
 
         </div>
