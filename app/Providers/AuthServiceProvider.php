@@ -36,8 +36,21 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role==='admin';
         });
 
+        /**
+         * Update-Site:
+         * People with this ability can create tags, edit the homepage content, create topics and categories.
+         * They can also edit default site settings.
+         */
         Gate::define('update-site', function (User $user){
             return $user->role==='admin' or $user->role==='mod';
+        });
+
+        Gate::define('update-server', function (User $user){
+            return $user->role==='admin';
+        });
+
+        Gate::define('upload-media', function (User $user){
+            return $user->hasVerifiedEmail();
         });
 
     }
