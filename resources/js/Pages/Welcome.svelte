@@ -2,11 +2,13 @@
     import BlockHeader from "@/Components/BlockHeader.svelte";
     import * as feather from "feather-icons/dist/feather"
     import {inertia, Link, page} from '@inertiajs/svelte'
+    import FrontPageContent from "@/Components/FrontPageContent.svelte";
 
     export let serverMessage;
     let test = "Hiya";
     export let topics;
     export let categories;
+    export let frontpage;
     console.log(categories)
     console.log(topics)
 </script>
@@ -19,6 +21,9 @@
     <div class="div1 container grid-lg">
         <div class="columns">
             <div class="column col-xs-12">
+                <FrontPageContent post={frontpage}>
+
+                </FrontPageContent>
                 {#each categories as cata}
                     <BlockHeader title="{cata.name}">
                         <table class="table hover_effect">
