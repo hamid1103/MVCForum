@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reply;
 use App\Models\Topic;
 use Inertia\Inertia;
 use App\Models\Post;
@@ -11,11 +12,16 @@ use Illuminate\Http\RedirectResponse;
 
 class PostsController extends Controller
 {
-    public function show($id)
+    public function show($id, $page = 1)
     {
         $post = Post::findOrFail($id);
+        $replies = Reply::where('post_id', '=', $post->id)->with('user')->paginate(15);
+
+        //getReplies (With optional pageination value)
+
         return Inertia::render('ViewPost', [
-            'post' => $post
+            'post' => $post,
+            'replies'=>$replies
         ]);
     }
 

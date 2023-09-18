@@ -4,6 +4,8 @@
     import Header from "@editorjs/header";
     import SimpleImage from "@editorjs/simple-image";
 
+    export let post_id;
+
     const editor = new EditorJS({
         tools: {
             header: {
@@ -20,10 +22,16 @@
 
     let confirmed;
     let post = useForm({
-        isNSFW: false
+        post_id: post_id,
+        postContent: {}
     })
-    function uploadPost(){
-
+    async function uploadPost(){
+        if(!confirmed)
+            return
+        const data = await editor.save()
+        $post.postContent = data
+        console.log($post.postContent)
+        $post.post('/reply/create');
     }
 </script>
 <div class="card">
@@ -37,10 +45,6 @@
                 <div class="editorholder" id="editorjs"></div>
             </div>
             <div class="form-group">
-                <label class="form-switch">
-                    <input type="checkbox" bind:checked={$post.isNSFW}>
-                    <i class="form-icon"></i> NSFW
-                </label>
                 <label class="form-switch">
                     <input type="checkbox" bind:checked={confirmed}>
                     <i class="form-icon"></i> Confirm Posting This

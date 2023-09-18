@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Reply
- * 
+ *
  * @property int $id
  * @property int $post_id
  * @property int $score
@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $user_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Post $post
  * @property User $user
  *
@@ -32,7 +32,8 @@ class Reply extends Model
 	protected $casts = [
 		'post_id' => 'int',
 		'score' => 'int',
-		'user_id' => 'int'
+		'user_id' => 'int',
+        'context' => 'array'
 	];
 
 	protected $fillable = [

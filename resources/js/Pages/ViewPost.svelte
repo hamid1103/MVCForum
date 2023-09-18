@@ -4,9 +4,11 @@
     import {page} from "@inertiajs/svelte";
     import MakePost from "@/Pages/MakePost.svelte";
     import MakeReply from "@/Components/MakeReply.svelte";
+    import ReplyView from "@/Components/ReplyView.svelte";
 
     export let post;
-    console.log(post)
+    export let replies;
+    console.log(replies)
 </script>
 <svelte:head>
     <title>{post.name}</title>
@@ -45,7 +47,12 @@
                 </div>
             </PostView>
             <!--Replies here-->
-            <MakeReply></MakeReply>
+
+            {#each replies.data as reply}
+                <ReplyView reply={reply}></ReplyView>
+            {/each}
+
+            <MakeReply post_id="{post.id}"></MakeReply>
 
 
         </div>
