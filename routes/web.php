@@ -39,13 +39,15 @@ Route::get('/', function () {
         $Topics = Topic::where('nsfw', '=', '0')->get();
     }
 
-    return Inertia::render('Welcome', ['topics' => $Topics, 'categories' => $Categories]);
+    return Inertia::render('Welcome', ['topics' => $Topics, 'categories' => $Categories, 'frontpage'=>\Illuminate\Support\Facades\Storage::read('public/frontpage.doca')]);
 });
 
 Route::get('/settings', [\App\Http\Controllers\UserModelController::class, 'edit']);
 Route::post('/updateBio', [\App\Http\Controllers\UserModelController::class, 'updateBio']);
 Route::post('/updateStatus', [\App\Http\Controllers\UserModelController::class, 'updateStatus']);
 Route::post('/updateSettings', [\App\Http\Controllers\UserModelController::class, 'updateSettings']);
+
+Route::post('/updateFrontPage', [\App\Http\Controllers\AdminController::class, 'saveFrontPageContent']);
 
 Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index']);
 
