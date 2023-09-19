@@ -51,9 +51,9 @@
             {#each replies.data as reply}
                 <ReplyView reply={reply}></ReplyView>
             {/each}
-
-            <MakeReply post_id="{post.id}"></MakeReply>
-
+            {#if $page.props.auth.user !== null}
+                <MakeReply post_id="{post.id}"></MakeReply>
+            {/if}
 
         </div>
     </div>
