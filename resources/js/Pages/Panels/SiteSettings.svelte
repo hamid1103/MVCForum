@@ -7,7 +7,7 @@
     export let frontpage;
 
     let editor;
-    if(frontpage === undefined){
+    if(frontpage === 404){
         editor = new EditorJS({
             tools: {
                 header: {
@@ -37,8 +37,7 @@
             data: JSON.parse(frontpage)
         })
     }
-
-
+    
     let saveCont = useForm({
         PostContent: ''
     })

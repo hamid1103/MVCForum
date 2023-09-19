@@ -15,7 +15,12 @@ class AdminController extends Controller
     {
         $user = \Auth::user();
         if (Gate::allows('administrate', $user)){
-            return Inertia::render('Admin/AdminHomePanel', ['frontpage'=>Storage::read('public/frontpage.doca')]);
+            if(Storage::exists('public/frontpage.doca')){
+                $frontpage = Storage::read('public/frontpage.doca');
+            }else{
+                $frontpage = 404;
+            }
+            return Inertia::render('Admin/AdminHomePanel', ['frontpage'=>$frontpage]);
         }else{
             Request::session()->flash('alert', [
                 'type'=>'error',

@@ -11,6 +11,7 @@
     export let frontpage;
     console.log(categories)
     console.log(topics)
+    console.log(frontpage)
 </script>
 
 <svelte:head>
@@ -21,9 +22,10 @@
     <div class="div1 container grid-lg">
         <div class="columns">
             <div class="column col-xs-12">
-                <FrontPageContent post={frontpage}>
-
-                </FrontPageContent>
+                {#if frontpage !== 404}
+                    <FrontPageContent post={frontpage}>
+                    </FrontPageContent>
+                {/if}
                 {#each categories as cata}
                     <BlockHeader title="{cata.name}">
                         <table class="table hover_effect">
@@ -67,7 +69,7 @@
                         <button class="btn">Buttons</button>
                     </div>
                 </div>
-                {:else }
+            {:else }
                 <div class="card-header">
                     <div class="card-title h5">
                         {$page.props.auth.user.name}
@@ -97,12 +99,13 @@
 
 
 <style>
-    .hover_effect tbody tr{
+    .hover_effect tbody tr {
         background-color: white;
         color: black;
         transition: 200ms;
     }
-    .hover_effect tbody tr:hover{
+
+    .hover_effect tbody tr:hover {
         background-color: #3b4351;
         color: white;
         transition: 250ms;

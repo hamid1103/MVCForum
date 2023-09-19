@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use App\Models\Category;
 use App\Models\Topic;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,13 @@ Route::get('/', function () {
         $Topics = Topic::where('nsfw', '=', '0')->get();
     }
 
-    return Inertia::render('Welcome', ['topics' => $Topics, 'categories' => $Categories, 'frontpage'=>\Illuminate\Support\Facades\Storage::read('public/frontpage.doca')]);
+    if(Storage::exists('public/frontpage.doca')){
+        $frontpage = Storage::read('public/frontpage.doca');
+    }else{
+        $frontpage = 404;
+    }
+
+    return Inertia::render('Welcome', ['topics' => $Topics, 'categories' => $Categories, 'frontpage'=>$frontpage]);
 });
 
 Route::get('/settings', [\App\Http\Controllers\UserModelController::class, 'edit']);
