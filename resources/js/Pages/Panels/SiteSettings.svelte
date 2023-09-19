@@ -37,7 +37,7 @@
             data: JSON.parse(frontpage)
         })
     }
-    
+
     let saveCont = useForm({
         PostContent: ''
     })

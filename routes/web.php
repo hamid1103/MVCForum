@@ -82,6 +82,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::post('/createPost', [\App\Http\Controllers\PostsController::class, 'createPost']);
+Route::post('/updatePost', [\App\Http\Controllers\PostsController::class, 'updatePost']);
 
 Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 

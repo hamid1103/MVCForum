@@ -59,4 +59,12 @@ class PostsController extends Controller
         return redirect("/post/{$newPost->id}");
     }
 
+    public function updatePost(Request $request): RedirectResponse
+    {
+        $id = $request->pid;
+        $content = $request->PostContent;
+        Post::where('id', '=',$id)->update(['content' => $content]);
+        return redirect("/post/{$id}");
+    }
+
 }
