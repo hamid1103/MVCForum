@@ -1,3 +1,7 @@
+<script context="module">
+    export { default as layout } from '../../Layout/AdminHomePanel.svelte'
+</script>
+
 <script>
     import EditorJS from "@editorjs/editorjs";
     import Header from "@editorjs/header";

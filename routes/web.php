@@ -54,9 +54,14 @@ Route::post('/updateBio', [\App\Http\Controllers\UserModelController::class, 'up
 Route::post('/updateStatus', [\App\Http\Controllers\UserModelController::class, 'updateStatus']);
 Route::post('/updateSettings', [\App\Http\Controllers\UserModelController::class, 'updateSettings']);
 
-Route::post('/updateFrontPage', [\App\Http\Controllers\AdminController::class, 'saveFrontPageContent']);
+Route::middleware('can:update-server')->controller(\App\Http\Controllers\AdminController::class)->group(function (){
+    Route::post('/updateFrontPage', 'saveFrontPageContent');
+    Route::get('/admin', 'index');
+    Route::get('/admin/siteSettings', 'SiteSettings');
+});
 
-Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index']);
+
+
 
 Route::get('/signin', function () {
     return Inertia::render('SignIn');

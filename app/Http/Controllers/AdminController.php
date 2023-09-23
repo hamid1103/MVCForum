@@ -15,12 +15,7 @@ class AdminController extends Controller
     {
         $user = \Auth::user();
         if (Gate::allows('administrate', $user)){
-            if(Storage::exists('public/frontpage.doca')){
-                $frontpage = Storage::read('public/frontpage.doca');
-            }else{
-                $frontpage = 404;
-            }
-            return Inertia::render('Admin/AdminHomePanel', ['frontpage'=>$frontpage]);
+            return Inertia::render('Panels/AdminHome');
         }else{
             Request::session()->flash('alert', [
                 'type'=>'error',
@@ -28,6 +23,16 @@ class AdminController extends Controller
             ]);
             return redirect('/');
         }
+    }
+
+    public function SiteSettings()
+    {
+        if(Storage::exists('public/frontpage.doca')){
+            $frontpage = Storage::read('public/frontpage.doca');
+        }else{
+            $frontpage = 404;
+        }
+        return Inertia::render('Panels/SiteSettings', ['frontpage'=>$frontpage]);
     }
 
     public function saveFrontPageContent(Request $request)
