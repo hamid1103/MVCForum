@@ -1,10 +1,13 @@
+<script context="module">
+    import DefaultLayout from "@/Layout/DefaultLayout.svelte";
+    import AdminHomePanel from "@/Layout/AdminHomePanel.svelte";
+
+    export const layout = [DefaultLayout, AdminHomePanel]
+</script>
 <script>
-    let UsersPromise;
+    export let users;
 
-    async function getUsers(){
-
-    }
-
+    console.log(users)
 </script>
 
 <div class="card">
@@ -18,5 +21,15 @@
     </div>
     <div class="card-body">
 
+        <div class="s-rounded userHolder">
+
+        </div>
+
     </div>
 </div>
+<style>
+    .userHolder {
+        overflow-y: auto;
+        max-height: 70%;
+    }
+</style>

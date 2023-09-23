@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reply;
+use App\Models\Tag;
 use App\Models\Topic;
 use Inertia\Inertia;
 use App\Models\Post;
@@ -23,6 +24,12 @@ class PostsController extends Controller
             'post' => $post,
             'replies'=>$replies
         ]);
+    }
+
+    public function makeTag(Request $request): RedirectResponse
+    {
+        Tag::create(['name' => $request->name]);
+        return redirect('/');
     }
 
     public function newPost(string $tid)

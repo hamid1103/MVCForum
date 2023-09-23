@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -23,6 +25,17 @@ class AdminController extends Controller
             ]);
             return redirect('/');
         }
+    }
+
+    public function roles()
+    {
+        $Users= User::paginate(30);
+        return Inertia::render('Panels/Roles', ['users'=>$Users]);
+    }
+    public function tags()
+    {
+        $tags = Tag::all();
+        return Inertia::render('Panels/Tags', ['tags'=>$tags]);
     }
 
     public function SiteSettings()

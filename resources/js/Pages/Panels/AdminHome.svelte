@@ -1,5 +1,8 @@
 <script context="module">
-    export { default as layout } from '../../Layout/AdminHomePanel.svelte'
+    import DefaultLayout from "@/Layout/DefaultLayout.svelte";
+    import AdminHomePanel from "@/Layout/AdminHomePanel.svelte";
+
+    export const layout = [DefaultLayout, AdminHomePanel]
 </script>
 <div>
     Admin Home
