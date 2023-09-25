@@ -23,7 +23,7 @@ class AdminController extends Controller
                 'type'=>'error',
                 'message'=>'You are not authorized to access this url'
             ]);
-            return redirect('/');
+            return to_route('/');
         }
     }
 

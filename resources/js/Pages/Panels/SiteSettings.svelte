@@ -1,15 +1,9 @@
-<script context="module">
-    import DefaultLayout from "@/Layout/DefaultLayout.svelte";
-    import AdminHomePanel from "@/Layout/AdminHomePanel.svelte";
-
-    export const layout = [DefaultLayout, AdminHomePanel]
-</script>
-
 <script>
     import EditorJS from "@editorjs/editorjs";
     import Header from "@editorjs/header";
     import SimpleImage from "@editorjs/simple-image";
     import {useForm} from "@inertiajs/svelte";
+    import AdminHomePanel from "@/Layout/AdminHomePanel.svelte";
 
     export let frontpage;
 
@@ -57,6 +51,7 @@
 
 </script>
 
+<AdminHomePanel></AdminHomePanel>
 
 <div class="card">
     <div class="card-header">

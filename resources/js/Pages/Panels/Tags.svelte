@@ -1,11 +1,6 @@
-<script context="module">
-    import DefaultLayout from "@/Layout/DefaultLayout.svelte";
-    import AdminHomePanel from "@/Layout/AdminHomePanel.svelte";
-
-    export const layout = [DefaultLayout, AdminHomePanel]
-</script>
 <script>
     import {useForm} from "@inertiajs/svelte";
+    import AdminHomePanel from "@/Layout/AdminHomePanel.svelte";
 
     export let tags;
     console.log(tags)
@@ -18,6 +13,9 @@
     }
 
 </script>
+
+<AdminHomePanel></AdminHomePanel>
+
 <div class="card">
     <div class="card-header">
         <div class="card-title h5 text-center">Tags Management</div>

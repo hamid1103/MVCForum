@@ -1,14 +1,12 @@
-<script context="module">
-    import DefaultLayout from "@/Layout/DefaultLayout.svelte";
+<script>
     import AdminHomePanel from "@/Layout/AdminHomePanel.svelte";
 
-    export const layout = [DefaultLayout, AdminHomePanel]
-</script>
-<script>
     export let users;
 
     console.log(users)
 </script>
+
+<AdminHomePanel></AdminHomePanel>
 
 <div class="card">
     <div class="card-header">
