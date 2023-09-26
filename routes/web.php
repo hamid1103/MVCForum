@@ -104,6 +104,8 @@ Route::post('/register', [\App\Http\Controllers\AuthController::class, 'createUs
 Route::get('/topic/{tid}', [\App\Http\Controllers\TopicsController::class, 'show']);
 Route::get('/topic/{tid}/newPost', [\App\Http\Controllers\PostsController::class, 'newPost']);
 
+Route::post('/PostImageUpload', [\App\Http\Controllers\FileController::class, 'PostImageFromUpload']);
+Route::post('/PostImageURL', [\App\Http\Controllers\FileController::class, 'PostImageFromUrl']);
 
 //misc links
 Route::get('/about', function () {
