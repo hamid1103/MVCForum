@@ -5,6 +5,8 @@
     import EditorJS from '@editorjs/editorjs'
     import Header from '@editorjs/header'
     import SimpleImage from "@editorjs/simple-image";
+    import ImageTool from "@editorjs/image";
+    import {uploadByFile} from "@/CustomUpload.ts";
 
     const editor = new EditorJS({
         tools: {
@@ -16,7 +18,18 @@
                     defaultLevel: 2
                 }
             },
-            image: SimpleImage
+            image: {
+                class: ImageTool,
+                config: {
+                    endpoints: {
+                        byFile: 'http://127.0.0.1:8000/PostImageUpload', // Your backend file uploader endpoint
+                        byUrl: 'http://127.0.0.1:8000/PostImageURL', // Your endpoint that provides uploading by Url
+                    },
+                    uploader: {
+                        uploadByFile: uploadByFile,
+                    }
+                }
+            }
         }
     })
     export let topic_data;

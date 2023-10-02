@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 
 class FileController extends Controller
 {
@@ -12,12 +13,17 @@ class FileController extends Controller
         // image: binary
     public function PostImageFromUpload(Request $request)
     {
-        $url = $request->user()->id."/".date('m-d-Y_hia').".".$request->extension;
-        if(!Storage::put("public/{$url}", Json::encode($request->PostContent))){
+        $url = $request->user()->id."/";
+
+        if(!Storage::put("public/{$url}{$request->filename}", file_get_contents($request->file))){
+            return response()->json([
+                'success'=>0,
+                'msg'=>'bruh'
+            ]);
         }else{
-            return Json::encode([
+            return response()->json([
                 'success'=>1,
-                'file'=>['url'=>$url]
+                'file'=>Storage::url("{$url}{$request->filename}")
             ]);
         }
     }

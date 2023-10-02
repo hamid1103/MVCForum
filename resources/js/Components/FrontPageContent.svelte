@@ -13,7 +13,7 @@
                 <p>{@html block.data.text}</p>
             {:else if block.type == 'image'}
                 <div class="flex-centered">
-                    <img src="{block.data.url}" alt="{block.data.caption}" class="img img-responsive">
+                    <img src="{window.location.origin+block.data.file.url}" alt="{window.location.origin+'/'+block.data.file.url}" class="img img-responsive">
 
                 </div>
             {/if}
