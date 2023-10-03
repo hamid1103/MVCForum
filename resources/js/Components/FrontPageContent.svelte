@@ -12,10 +12,13 @@
             {:else if block.type == 'paragraph'}
                 <p>{@html block.data.text}</p>
             {:else if block.type == 'image'}
-                <div class="flex-centered">
-                    <img src="{window.location.origin+block.data.file.url}" alt="{window.location.origin+'/'+block.data.file.url}" class="img img-responsive">
+                {#if block.data.file}
+                    <div class="flex-centered">
+                        <img src="{window.location.origin+block.data.file.url}"
+                             alt="{window.location.origin+'/'+block.data.file.url}" class="img img-responsive">
 
-                </div>
+                    </div>
+                {/if}
             {/if}
         {/each}
     </div>

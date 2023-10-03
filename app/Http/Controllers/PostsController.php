@@ -29,7 +29,7 @@ class PostsController extends Controller
     public function makeTag(Request $request): RedirectResponse
     {
         Tag::create(['name' => $request->name]);
-        return redirect('/');
+        return redirect('/admin/tags');
     }
 
     public function newPost(string $tid)
