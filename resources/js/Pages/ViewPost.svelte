@@ -13,6 +13,7 @@
 
     export let post;
     export let replies;
+    export let tags;
     console.log(replies)
 
     let editor;
@@ -63,7 +64,7 @@
 <div class="div1 container grid-lg" style="overflow-y: auto;">
     <div class="columns">
         <div class="column col-sm-6">
-            <PostView title="{post.name}">
+            <PostView title="{post.name}" tags="{tags}">
                 <div class="card-body">
                     {#if editting}
                         <div id="editorjs"></div>
@@ -79,7 +80,6 @@
                                     <div class="flex-centered">
                                         <img src="{window.location.origin+block.data.file.url}"
                                              alt="{window.location.origin+'/'+block.data.file.url}" class="img img-responsive">
-
                                     </div>
                                 {/if}
                             {/if}

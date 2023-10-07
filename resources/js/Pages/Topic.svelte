@@ -4,6 +4,7 @@
     import PostPreview from "@/Components/PostPreview.svelte";
 
     export let posts;
+
     export let topic_data;
     console.log(topic_data)
     console.log(posts);

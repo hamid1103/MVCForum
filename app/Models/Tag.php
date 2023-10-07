@@ -11,10 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Tag
- * 
+ *
  * @property int $id
  * @property string $name
- * 
+ *
  * @property Collection|Post[] $posts
  *
  * @package App\Models

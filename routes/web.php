@@ -107,6 +107,10 @@ Route::get('/topic/{tid}/newPost', [\App\Http\Controllers\PostsController::class
 Route::post('/PostImageUpload', [\App\Http\Controllers\FileController::class, 'PostImageFromUpload']);
 Route::post('/PostImageURL', [\App\Http\Controllers\FileController::class, 'PostImageFromUrl']);
 
+Route::get('/getTags', [\App\Http\Controllers\PostsController::class, 'getTags']);
+Route::get('/getTags/{s}', [\App\Http\Controllers\PostsController::class, 'getTags']);
+Route::get('/getPostTags/{id}', [\App\Http\Controllers\PostsController::class, 'getPostTags']);
+
 //misc links
 Route::get('/about', function () {
     return Inertia::render('About');

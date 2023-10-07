@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reply;
 use App\Models\Tag;
+use App\Models\TagPost;
 use App\Models\Topic;
 use Inertia\Inertia;
 use App\Models\Post;
@@ -16,14 +17,36 @@ class PostsController extends Controller
     public function show($id, $page = 1)
     {
         $post = Post::findOrFail($id);
+        $tags = TagPost::where('post_id','=',$id)->with('tag')->get();
         $replies = Reply::where('post_id', '=', $post->id)->with('user')->paginate(15);
 
         //getReplies (With optional pageination value)
 
         return Inertia::render('ViewPost', [
             'post' => $post,
-            'replies'=>$replies
+            'replies'=>$replies,
+            'tags'=>$tags
         ]);
+    }
+
+    public function getTags(string $s = '')
+    {
+        if($s == '')
+        {
+            return Tag::all();
+        }else{
+            return Tag::where('name', 'LIKE', '%'.$s.'%')->get();
+        }
+    }
+
+    public function getPostTags(string $id)
+    {
+        return TagPost::where('post_id', '=', $id)->with('tag')->get();
+    }
+
+    public function getPostsWithTags(array $s)
+    {
+
     }
 
     public function makeTag(Request $request): RedirectResponse
@@ -55,13 +78,26 @@ class PostsController extends Controller
 
     public function createPost(Request $request): RedirectResponse
     {
+        //check for tags;
+        $tags = $request->tags;
+
         $newPost = Post::create([
             'name'=>$request->title,
             'topic_id' => $request->topicId,
             'user_id' => Auth::id(),
             'nsfw' => $request->isNSFW,
-            'content' => $request->postContent
+            'content' => $request->postContent,
         ]);
+
+        if($tags)
+        {
+            foreach($tags as $tag){
+                TagPost::create([
+                    'post_id' => $newPost->id,
+                    'tag_id' => $tag['id']
+                ]);
+            }
+        }
 
         return redirect("/post/{$newPost->id}");
     }

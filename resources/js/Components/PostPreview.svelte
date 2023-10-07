@@ -1,17 +1,19 @@
 <script>
     import {inertia, Link} from '@inertiajs/svelte'
+
     export let post;
     let prevtext = getText()
-    function getText(){
+
+    function getText() {
         // search first paragraph
         let blocks = post.content.blocks
         let data = '';
-        for (let i = 0; i < blocks.length; i++){
+        for (let i = 0; i < blocks.length; i++) {
             console.log('found block ')
             console.log(blocks[i])
-            if (blocks[i].type == 'paragraph'){
+            if (blocks[i].type == 'paragraph') {
                 data = blocks[i].data.text;
-                console.log('found '+data)
+                console.log('found ' + data)
                 break;
             }
         }
@@ -24,19 +26,24 @@
         <div class="tile">
             <div class="tile-content" style="width: 100%;">
                 <div class="tile-title text-bold" style="width: 100%;">{post.name}</div>
-                <div class="tile-subtitle" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 100%;">{prevtext}</div>
+                <div class="tile-subtitle"
+                     style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 100%;">{prevtext}</div>
+                {#each post.tags as tag}
+                    <span class="chip">{tag.name}</span>
+                {/each}
             </div>
         </div>
     </div>
 </div>
 
 <style>
-    .hover_effect{
+    .hover_effect {
         background-color: white;
         color: black;
         transition: 200ms;
     }
-    .hover_effect:hover{
+
+    .hover_effect:hover {
         background-color: #3b4351;
         color: white;
         transition: 250ms;

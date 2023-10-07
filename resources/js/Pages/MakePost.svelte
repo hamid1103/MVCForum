@@ -33,24 +33,39 @@
         }
     })
     export let topic_data;
-
     let post = useForm({
         title: '',
         topicId: topic_data.id,
         postContent: {},
         isNSFW: false,
-        user_id: $page.props.auth.id
+        user_id: $page.props.auth.id,
+        tags: []
     })
 
     let confirmed = false;
 
-    async function uploadPost(){
-        if(!confirmed)
+    async function uploadPost() {
+        if (!confirmed)
             return;
         const data = await editor.save()
         $post.postContent = data
         console.log($post)
         $post.post('/createPost');
+    }
+
+    async function getTags(s = '') {
+        const response = await fetch("/getTags/" + s);
+        let data = await response.json();
+        console.log(data)
+        return data
+    }
+
+    let tagsPromise = getTags()
+    let tagsearch = ''
+
+    function handleTagInput() {
+        console.log(tagsearch)
+        tagsPromise = getTags(tagsearch)
     }
 
 </script>
@@ -61,15 +76,46 @@
                 <BlockHeader title="New Post">
                     <form on:submit|preventDefault={uploadPost}>
                         <div class="form-group">
-                            <p>Do not use full image files/from clipboard. Only paste links! The editor will put them on automatically</p>
+                            <p>Do not use full image files/from clipboard. Only paste links! The editor will put them on
+                                automatically</p>
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="Title">Title</label>
-                            <input class="form-input" required type="text" id="Title" placeholder="Seven Seas" bind:value={$post.title}>
+                            <input class="form-input" required type="text" id="Title" placeholder="Seven Seas"
+                                   bind:value={$post.title}>
                         </div>
                         <div class="form-group s-rounded">
                             <label class="form-label">Content</label>
                             <div class="editorholder" id="editorjs"></div>
+                        </div>
+                        <div class="form-group">
+                            {#each $post.tags as tag, i}
+                                <span class="chip c-hand" on:click={()=>{
+                                    let newArr = $post.tags.splice(i,1)
+                                    $post.tags = $post.tags
+                                }}>{tag.name} - {i}</span>
+                            {/each}
+                            <form on:submit|preventDefault={handleTagInput}>
+                                <div class="popover popover-right">
+                                    <input class="form-input" type="text" id="input-example-1" bind:value={tagsearch} placeholder="Search Tags">
+                                    <div class="popover-container">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                {#await tagsPromise}
+                                                    <p>...waiting</p>
+                                                {:then tags}
+                                                    {#each tags as tag}
+                                                        <span class="chip c-hand" on:click={()=>{$post.tags = [...$post.tags, tag]; console.log($post.tags)}}>{tag.name}</span>
+                                                    {/each}
+                                                {:catch error}
+                                                    <p style="color: red">{error.message}</p>
+                                                {/await}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <div class="form-group">
                             <label class="form-switch">
