@@ -74,6 +74,12 @@ class Post extends Model
 					->withPivot('id');
 	}
 
+    public function scopeSearchTags($query, $tagids)
+    {
+        $query->whereHas('tags', function ($q) use ($tagids) {
+            $q->whereIn('id', $tagids);
+        })->get;
+    }
 	public function topic_stickies()
 	{
 		return $this->hasMany(TopicSticky::class);

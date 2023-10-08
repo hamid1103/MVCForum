@@ -64,11 +64,10 @@
                     <button class="btn btn-primary">Search</button>
                     <div class="popover-container">
                         <div class="card">
-                            <div class="card-header">
-                                ...
-                            </div>
                             <div class="card-body">
-                                ...
+                                <form action="/posts">
+                                    <input name="search" placeholder="Search Text">
+                                </form>
                             </div>
                             <div class="card-footer">
                                 ...

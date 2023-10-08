@@ -6,13 +6,10 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Topic;
 use App\Models\UserSettings;
-use Illuminate\Database\Query\JoinClause;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use function PHPUnit\Framework\once;
 
 class TopicsController extends Controller
 {

@@ -110,6 +110,7 @@ Route::post('/PostImageURL', [\App\Http\Controllers\FileController::class, 'Post
 Route::get('/getTags', [\App\Http\Controllers\PostsController::class, 'getTags']);
 Route::get('/getTags/{s}', [\App\Http\Controllers\PostsController::class, 'getTags']);
 Route::get('/getPostTags/{id}', [\App\Http\Controllers\PostsController::class, 'getPostTags']);
+Route::get('/posts', [\App\Http\Controllers\PostsController::class, 'getPosts']);
 
 //misc links
 Route::get('/about', function () {
