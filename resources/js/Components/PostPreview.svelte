@@ -28,9 +28,11 @@
                 <div class="tile-title text-bold" style="width: 100%;">{post.name}</div>
                 <div class="tile-subtitle"
                      style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 100%;">{prevtext}</div>
-                {#each post.tags as tag}
-                    <span class="chip">{tag.name}</span>
-                {/each}
+                {#if post.tags}
+                    {#each post.tags as tag}
+                        <span class="chip">{tag.name}</span>
+                    {/each}
+                {/if}
             </div>
         </div>
     </div>

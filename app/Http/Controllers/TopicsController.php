@@ -30,13 +30,13 @@ class TopicsController extends Controller
                 ])->with('tags')
                     ->paginate(15);
             }else{
-                $posts = Post::where('topic_id', $tid)->paginate(15);
+                $posts = Post::where('topic_id', $tid)->with('tags')->paginate(15);
             }
         }else{
             $posts = Post::where([
                 ['topic_id','=', $tid],
                 ['nsfw','=', '0'],
-            ])->paginate(15);
+            ])->with('tags')->paginate(15);
         }
 
         $tpd = Topic::findOrFail($tid);
