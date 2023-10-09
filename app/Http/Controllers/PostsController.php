@@ -59,19 +59,19 @@ class PostsController extends Controller
     {
         $search = [];
         $q = Post::query();
+        if($request->has('tags'))
+        {
+            $tagids = $request->get('tags');
+            $q->whereHas('tags', function ($t) use ($tagids)
+            {
+                $t->whereIn('tags.id', $tagids);
+            })->get();
+            $search = [...$search, 'tags'=>$request->get('tags')];
+        }
         if($request->has('search'))
         {
             $q->where('name', 'LIKE', '%'.$request->get('search').'%')->orWhere('content', 'LIKE', '%'.$request->get('search').'%');
             $search = [...$search, 'textSearch'=>$request->get('search')];
-        }
-        if($request->has('tags'))
-        {
-            parse_str($request->get('tags'), $tagids);
-            $q->whereHas('tags', function ($t) use ($tagids)
-            {
-                $t->whereIn('id', $tagids);
-            })->get();
-            $search = [...$search, 'tags'=>$request->get('tags')];
         }
 
         $posts = $q->with('tags')->orderBy('created_at', 'desc')->paginate(15);

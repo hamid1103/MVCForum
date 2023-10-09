@@ -61,12 +61,12 @@
                 {/if}
 
                 <div class="popover popover-bottom">
-                    <button class="btn btn-primary">Search</button>
+                    <a use:inertia href="/posts" class="btn btn-primary">Search</a>
                     <div class="popover-container">
                         <div class="card">
                             <div class="card-body">
                                 <form action="/posts">
-                                    <input name="search" placeholder="Search Text">
+                                    <input name="search" placeholder="Quick Search Text">
                                 </form>
                             </div>
                             <div class="card-footer">
