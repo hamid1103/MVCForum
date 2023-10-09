@@ -25,6 +25,10 @@
                 {#if frontpage !== 404}
                     <FrontPageContent post={frontpage}>
                     </FrontPageContent>
+                    {:else }
+                    <BlockHeader title="404 FrontPage Content">
+                        <h3>Admin can set frontpage content in site settings</h3>
+                    </BlockHeader>
                 {/if}
                 {#each categories as cata}
                     <BlockHeader title="{cata.name}">
