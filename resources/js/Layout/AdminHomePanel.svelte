@@ -11,8 +11,8 @@
             <a use:inertia href="/admin/siteSettings" class="btn">Site Settings</a>
             <a use:inertia href="/admin/roles" class="btn">Roles</a>
             <a use:inertia href="/admin/tags" class="btn">Tags</a>
-            <button class="btn">Categories</button>
-            <button class="btn">Topics</button>
+            <a use:inertia href="/admin/categories" class="btn">Categories</a>
+            <a use:inertia href="/admin/topics" class="btn">Topics</a>
         </div>
     </div>
     <div class="card-body">

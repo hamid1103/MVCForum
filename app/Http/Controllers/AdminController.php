@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Tag;
+use App\Models\Topic;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rules\In;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
@@ -46,6 +49,23 @@ class AdminController extends Controller
             $frontpage = 404;
         }
         return Inertia::render('Panels/SiteSettings', ['frontpage'=>$frontpage]);
+    }
+
+    public function categorie()
+    {
+        return Inertia::render('Panels/CategoriesPanel', ['categories'=>Category::all()]);
+    }
+
+    public function makeCat(Request $request)
+    {
+        Category::create([
+            'name' => $request->name
+        ]);
+        return back();
+    }
+    public function topics()
+    {
+        return Inertia::render('Panels/TopicsPanel', ['topics'=>Topic::all()]);
     }
 
     public function saveFrontPageContent(Request $request)

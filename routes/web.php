@@ -60,9 +60,13 @@ Route::middleware('can:update-server')->controller(\App\Http\Controllers\AdminCo
     Route::get('/admin/siteSettings', 'SiteSettings');
     Route::get('/admin/roles', 'roles');
     Route::get('/admin/tags','tags');
+    Route::get('/admin/topics','topics');
+    Route::get('/admin/categories', 'categorie');
 });
 
-Route::post('/makeTag', [\App\Http\Controllers\PostsController::class, 'makeTag']);
+Route::middleware('can:update-site')->post('/makeTag', [\App\Http\Controllers\PostsController::class, 'makeTag']);
+Route::middleware('can:update-site')->post('/makeCat', [\App\Http\Controllers\AdminController::class, 'makeCat']);
+
 
 
 Route::get('/signin', function () {
