@@ -23,6 +23,13 @@ class AuthController extends Controller
 
         $login = $request->login;
         $user = User::where('email',$login)->orWhere('name', $login)->first();
+        if (!$user) {
+            $request->session()->flash('alert', [
+                'type'=>'error',
+                'message'=>'The provided credentials do not match our records.'
+            ]);
+            return back();
+        }
         if (Auth::attempt(['email' => $user->email, 'password' => $request->password]) ||
             Auth::attempt(['username' => $user->name, 'password' => $request->password])) {
             Auth::loginUsingId($user->id);
@@ -32,6 +39,7 @@ class AuthController extends Controller
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
+            'username'=>'The provided credentials do not match our records.'
         ])->onlyInput('email');
     }
 
