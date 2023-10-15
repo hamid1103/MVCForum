@@ -94,7 +94,14 @@
                 <button class="btn btn-primary" on:click={()=>{
                     let textSearchParam;
                     if(search.textSearch !== '' || search.textSearch !== undefined)
-                    {textSearchParam = new URLSearchParams({search: search.textSearch}); console.log(search.textSearch)}
+                    {
+                        textSearchParam = new URLSearchParams({search: search.textSearch});
+                        console.log(search.textSearch)
+                    }
+                    if(search.tags == undefined)
+                    {
+                        search.tags = []
+                    }
                     const tagsSearchParam = new URLSearchParams(search.tags.map(s=>['tags[]',s.id]))
                     console.log(tagsSearchParam.toString())
                     if(search.textSearch==undefined){
