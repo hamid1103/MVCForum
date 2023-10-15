@@ -46,9 +46,10 @@ class AuthController extends Controller
     public function createUser(Request $request) : RedirectResponse
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required|min:8'],
-            'name' => ['required']
+            'email' => ['required','email'],
+            'name' => ['required'],
+            'password' => ['required','min:8'],
+            'password_confirm'=>['required','same:password'],
         ]);
 
         //create user
@@ -71,11 +72,7 @@ class AuthController extends Controller
             return redirect('/email/verify');
             //return Inertia::render('EmailVerification/CheckEmailVerification');
         }
-
-        //return errors
-        return back()->withErrors([
-            'email' => '.',
-        ])->onlyInput('email');
+        return back()->withErrors();
     }
 
     public function logout(Request $request): RedirectResponse

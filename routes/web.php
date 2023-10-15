@@ -111,8 +111,12 @@ Route::get('/topic/{tid}/newPost', [\App\Http\Controllers\PostsController::class
 Route::post('/PostImageUpload', [\App\Http\Controllers\FileController::class, 'PostImageFromUpload']);
 Route::post('/PostImageURL', [\App\Http\Controllers\FileController::class, 'PostImageFromUrl']);
 
+Route::post('/createTopic', [\App\Http\Controllers\TopicsController::class, 'newTopic']);
+
 Route::get('/getTags', [\App\Http\Controllers\PostsController::class, 'getTags']);
 Route::get('/getTags/{s}', [\App\Http\Controllers\PostsController::class, 'getTags']);
+Route::get('/getCats', [\App\Http\Controllers\TopicsController::class, 'getCats']);
+Route::get('/getCats/{s}', [\App\Http\Controllers\TopicsController::class, 'getCats']);
 Route::get('/getPostTags/{id}', [\App\Http\Controllers\PostsController::class, 'getPostTags']);
 Route::get('/posts', [\App\Http\Controllers\PostsController::class, 'getPosts']);
 

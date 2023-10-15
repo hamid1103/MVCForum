@@ -65,7 +65,7 @@ class AdminController extends Controller
     }
     public function topics()
     {
-        return Inertia::render('Panels/TopicsPanel', ['topics'=>Topic::all()]);
+        return Inertia::render('Panels/TopicsPanel', ['topics'=>Topic::with('category')->get()->all()]);
     }
 
     public function saveFrontPageContent(Request $request)

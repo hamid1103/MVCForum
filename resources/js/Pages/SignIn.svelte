@@ -12,21 +12,18 @@ let form = useForm({
 let RegForm = useForm({
     email: null,
     password: null,
+    password_confirm: null,
     name: null
 })
 function registerSubmit(){
-    if (error !== '') {
-        return;
-    }
     $RegForm.post('/register')
 }
 
-let pw2;
+export let errors = {};
 let error = '';
 
 function checkMatch() {
-    console.log(pw2 + ' | ' + $RegForm.password)
-    if (pw2 !== $RegForm.password) {
+    if ($RegForm.password_confirm !== $RegForm.password) {
         error = "Passwords don't match"
     } else {
         error = ''
@@ -77,20 +74,33 @@ function submit() {
                             <div class="form-group">
                                 <label class="form-label">Email</label>
                                 <input class="form-input" type="text" placeholder="Email" required bind:value={$RegForm.email}>
+                                {#if errors.email}
+                                    <div class="bg-error">{errors.email}</div>
+                                {/if}
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label" >Username</label>
                                 <input class="form-input" type="text" placeholder="Username" required bind:value={$RegForm.name}>
+                                {#if errors.name}
+                                    <div class="bg-error">{errors.name}</div>
+                                {/if}
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">Password</label>
                                 <input class="form-input" type="password" required bind:value={$RegForm.password}>
+                                {#if errors.password}
+                                    <div class="bg-error">{errors.password}</div>
+                                {/if}
                             </div>
+
                             <div class="form-group">
                                 <label class="form-label">Repeat Password</label>
-                                <input class="form-input" type="password" required bind:value={pw2} on:keyup={checkMatch} on:change={checkMatch}>
+                                <input class="form-input" type="password" required bind:value={$RegForm.password_confirm} on:keyup={checkMatch} on:change={checkMatch}>
+                                {#if errors.password_confirm}
+                                    <div class="bg-error">{errors.password_confirm}</div>
+                                {/if}
                                 {#if error !== ''}
                                     <div class="bg-error">{error}</div>
                                 {/if}

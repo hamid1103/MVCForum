@@ -76,10 +76,6 @@
                 <BlockHeader title="New Post">
                     <form on:submit|preventDefault={uploadPost}>
                         <div class="form-group">
-                            <p>Do not use full image files/from clipboard. Only paste links! The editor will put them on
-                                automatically</p>
-                        </div>
-                        <div class="form-group">
                             <label class="form-label" for="Title">Title</label>
                             <input class="form-input" required type="text" id="Title" placeholder="Seven Seas"
                                    bind:value={$post.title}>

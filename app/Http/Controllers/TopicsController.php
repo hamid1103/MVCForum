@@ -13,6 +13,15 @@ use Illuminate\Http\Request;
 
 class TopicsController extends Controller
 {
+    public function getCats(string $s = '')
+    {
+        if($s == '')
+        {
+            return Category::all();
+        }else{
+            return Category::where('name', 'LIKE', '%'.$s.'%')->get();
+        }
+    }
     public function show(string $tid)
     {
         $user = Auth::user();
@@ -69,8 +78,7 @@ class TopicsController extends Controller
                 'name'=>$request->name,
                 'category_id' => $request->category,
                 'description' => $request->description,
-                'nsfw'=>$request->isNSFW,
-                'type' => $request->type]);
+                'nsfw'=>$request->isNSFW]);
 
             $request->session()->flash('alert', [
                 'type'=>'success',

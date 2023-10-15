@@ -50,9 +50,6 @@
 <div class="card">
     <div class="card-body">
         <form on:submit|preventDefault={uploadPost}>
-            <div class="form-group">
-                <p>Do not use full image files/from clipboard. Only paste links! The editor will put them on automatically</p>
-            </div>
             <div class="form-group s-rounded">
                 <label class="form-label">Content</label>
                 <div class="editorholder" id="editorjs"></div>
