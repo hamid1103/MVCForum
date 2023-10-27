@@ -31,7 +31,7 @@ class AuthController extends Controller
             return back();
         }
         if (Auth::attempt(['email' => $user->email, 'password' => $request->password]) ||
-            Auth::attempt(['username' => $user->name, 'password' => $request->password])) {
+            Auth::attempt(['name' => $user->name, 'password' => $request->password])) {
             Auth::loginUsingId($user->id);
             $request->session()->regenerate();
             return redirect('/');

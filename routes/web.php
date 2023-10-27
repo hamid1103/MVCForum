@@ -110,6 +110,8 @@ Route::get('/topic/{tid}/newPost', [\App\Http\Controllers\PostsController::class
 
 Route::post('/PostImageUpload', [\App\Http\Controllers\FileController::class, 'PostImageFromUpload']);
 Route::post('/PostImageURL', [\App\Http\Controllers\FileController::class, 'PostImageFromUrl']);
+Route::post('/likePost', [\App\Http\Controllers\PostsController::class, 'likePost']);
+Route::get('/getLike/{pid}', [\App\Http\Controllers\PostsController::class, 'getLike']);
 
 Route::post('/createTopic', [\App\Http\Controllers\TopicsController::class, 'newTopic']);
 

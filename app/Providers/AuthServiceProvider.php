@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\Models\PostLike;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -29,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('create-post', function (){
-            return Auth::user()->hasVerifiedEmail();
+            return (Auth::user()->hasVerifiedEmail() and Auth::user()->postlikes()->sum() >= 5) or Auth::user()->role === "admin" or Auth::user()->role === "mod";
         });
 
         Gate::define('administrate', function (User $user){

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PostLike;
 use App\Models\Reply;
 use App\Models\Tag;
 use App\Models\TagPost;
@@ -20,13 +21,15 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
         $tags = TagPost::where('post_id','=',$id)->with('tag')->get();
         $replies = Reply::where('post_id', '=', $post->id)->with('user')->paginate(15);
+        $likes = $post->postlikes()->count();
 
         //getReplies (With optional pageination value)
 
         return Inertia::render('ViewPost', [
             'post' => $post,
             'replies'=>$replies,
-            'tags'=>$tags
+            'tags'=>$tags,
+            'likes'=>$likes
         ]);
     }
 
@@ -91,11 +94,24 @@ class PostsController extends Controller
     {
         $tpd = Topic::findOrFail($tid);
         if(Auth::check()){
-            if(Auth::user()->hasVerifiedEmail())
+            if(Auth::user()->role === "admin" or Auth::user()->role === "mod")
             {
                 return Inertia::render('MakePost', [
                     'topic_data' => $tpd
                 ]);
+            }
+            if(Auth::user()->hasVerifiedEmail())
+            {
+                if(Auth::user()->postlikes()->count()>=3){
+                    return Inertia::render('MakePost', [
+                        'topic_data' => $tpd
+                    ]);
+                }else{
+                    \Request::session()->flash('alert', [
+                        'type'=>'error',
+                        'message'=>'You must give 3 likes to other posts first'
+                    ]);
+                }
             }else{
                 \Request::session()->flash('alert', [
                     'type'=>'error',
@@ -140,6 +156,35 @@ class PostsController extends Controller
         $content = $request->PostContent;
         Post::where('id', '=',$id)->update(['content' => $content]);
         return redirect("/post/{$id}");
+    }
+
+    public function likePost(Request $request)
+    {
+        $pid = $request->postid;
+        //check if already like by looking for a postlike with both userid and postid
+        //make one if not
+        if(!PostLike::where([['post_id','=',$pid],['user_id', '=', Auth::user()->id]])->exists())
+        {
+            $postlike = PostLike::create([
+                'post_id' => $pid,
+                'user_id' => Auth::user()->id
+            ]);
+            return $postlike;
+        }
+    }
+
+    public function getLike(string $pid)
+    {
+        if(PostLike::where([['post_id','=',$pid],['user_id', '=', Auth::user()->id]])->exists())
+        {
+            return response()->json([
+                'liked'=>true,
+            ]);
+        }else{
+            return response()->json([
+                'liked'=>false
+            ]);
+        }
     }
 
 }

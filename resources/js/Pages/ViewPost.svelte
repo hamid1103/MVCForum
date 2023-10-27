@@ -5,6 +5,7 @@
     import MakePost from "@/Pages/MakePost.svelte";
     import MakeReply from "@/Components/MakeReply.svelte";
     import ReplyView from "@/Components/ReplyView.svelte";
+    import LikePost from "@/Components/LikePost.svelte";
     import EditorJS from "@editorjs/editorjs";
     import Header from "@editorjs/header";
     import SimpleImage from "@editorjs/simple-image";
@@ -14,6 +15,7 @@
     export let post;
     export let replies;
     export let tags;
+    export let likes;
     console.log(replies)
 
     let editor;
@@ -89,7 +91,7 @@
                 <div class="card-footer bg-dark p-1">
                     <div class="columns ">
                         <div class="column col-3">
-                            <i class="icon icon-upward c-hand"></i>
+                            <LikePost postid="{post.id}"></LikePost>
                             <i class="icon icon-downward c-hand"></i>
                         </div>
                         <div class="column col-6">
