@@ -39,7 +39,7 @@
                     class: ImageTool,
                     config: {
                         endpoints: {
-                            byFile: 'http://127.0.0.1:8000/PostImageUpload', // Your backend file uploader endpoint
+                            byFile: '/PostImageUpload/', // Your backend file uploader endpoint
                             byUrl: 'http://127.0.0.1:8000/PostImageURL', // Your endpoint that provides uploading by Url
                         },
                         uploader: {

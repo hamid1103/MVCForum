@@ -5,7 +5,7 @@ export async function uploadByFile(file){
     console.log(file)
     formd.set('file', file)
     formd.set('filename', file.name)
-    let data = await axios.post('http://127.0.0.1:8000/PostImageUpload', formd)
+    let data = await axios.post('/PostImageUpload/', formd)
         .then((response)=>{
             console.log(response.data)
             return {
