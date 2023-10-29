@@ -3,7 +3,7 @@ import axios from "axios";
 export async function LikePost(postid: string){
     let formd = new FormData
     formd.set('postid', postid)
-    let data = await axios.post('/likePost/', formd)
+    let data = await axios.post('/likePost', formd)
         .then((response)=>{
             console.log(response)
             return true
